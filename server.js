@@ -6,8 +6,6 @@ process.on('uncaughtException', (err) => {
   process.exit(1);
 });
 
-console.log(process.env.NODE_ENV);
-
 const DB = process.env.DATABASE.replace(
   '<PASSWORD>',
   encodeURIComponent(process.env.DATABASE_PASSWORD),

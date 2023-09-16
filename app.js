@@ -6,6 +6,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
 const dotenv = require('dotenv');
 
 // Start express app
@@ -42,6 +43,9 @@ app.use(
     },
   }),
 );
+
+// Compressing all the HTML and JSON files
+app.use(compression());
 
 // Logging development
 dotenv.config({ path: './config.env' });

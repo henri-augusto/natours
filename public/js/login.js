@@ -24,11 +24,10 @@ const showAlert = (type, msg) => {
 
 // SIGN UP
 const signUp = async (newUser) => {
-  console.log(newUser);
   try {
     const result = await axios({
       method: 'POST',
-      url: 'http://localhost:8000/api/v1/users/signup',
+      url: '/api/v1/users/signup',
       data: newUser,
     });
 
@@ -48,7 +47,7 @@ const login = async (email, password) => {
   try {
     const result = await axios({
       method: 'POST',
-      url: 'http://localhost:8000/api/v1/users/login',
+      url: '/api/v1/users/login',
       data: {
         email,
         password,
@@ -71,7 +70,7 @@ const logout = async () => {
   try {
     const result = await axios({
       method: 'GET',
-      url: 'http://localhost:8000/api/v1/users/logout',
+      url: '/api/v1/users/logout',
     });
     if (result.data.status === 'success') {
       location.reload(true);
@@ -87,8 +86,8 @@ const updateSettings = async (data, type) => {
   try {
     const url =
       type === 'password'
-        ? 'http://localhost:8000/api/v1/users/updatePassword/'
-        : 'http://localhost:8000/api/v1/users/updateMe/';
+        ? '/api/v1/users/updatePassword/'
+        : '/api/v1/users/updateMe/';
     const result = await axios({
       method: 'PATCH',
       url,
@@ -107,9 +106,8 @@ const payment = async (tourId) => {
   try {
     const result = await axios({
       method: 'GET',
-      url: `http://localhost:8000/api/v1/bookings/checkout-session/${tourId}`,
+      url: `/api/v1/bookings/checkout-session/${tourId}`,
     });
-    console.log(result);
     location.assign(result.data.session);
   } catch (error) {
     console.log(error);
@@ -155,7 +153,6 @@ if (formUserData)
     form.append('name', document.getElementById('name').value);
     form.append('email', document.getElementById('email').value);
     form.append('photo', document.getElementById('photo').files[0]);
-    console.log(form);
 
     updateSettings(form, 'settings');
   });

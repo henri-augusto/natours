@@ -25,7 +25,6 @@ const errorProd = (error, req, res) => {
         message: error.message,
       });
     }
-    console.log('erro: ', error);
 
     return res.status(error.statusCode).json({
       status: 'erro',
@@ -39,7 +38,6 @@ const errorProd = (error, req, res) => {
       msg: error.message,
     });
   }
-  console.log('erro: ', error);
 
   return res.status(error.statusCode).render('error', {
     title: 'Something went wrong!',
