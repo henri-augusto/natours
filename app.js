@@ -8,6 +8,7 @@ const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
 
+// Start express app
 const app = express();
 
 const AppError = require('./utils/appError');
