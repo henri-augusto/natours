@@ -19,7 +19,7 @@ mongoose.connect(DB).then(() => {
 const port = process.env.PORT || 3000;
 
 const server = app.listen(port, () => {
-  console.log(`App rodando na porta ${port}`);
+  console.log(`App rodando na porta ${port} and is in ${process.env.NODE_ENV}`);
 });
 
 process.on('unhandledRejection', (err) => {
