@@ -27,12 +27,12 @@ const reviews = JSON.parse(
 // IMPORTAR DADOS PARA O BANDO DE DADOS
 const importData = async () => {
   try {
-    // await User.create(users, { validateBeforeSave: false });
+    await User.create(users, { validateBeforeSave: false });
     await Tour.create(tours);
     await Review.create(reviews);
-    // console.log('Os dados foram carregados');
+    console.log('Os dados foram carregados');
   } catch (error) {
-    // console.log(error);
+    console.log(error);
   }
   process.exit();
 };
@@ -41,9 +41,9 @@ const importData = async () => {
 const deleteData = async () => {
   try {
     await Tour.deleteMany();
-    // await User.deleteMany();
+    await User.deleteMany();
     await Review.deleteMany();
-    // console.log('Os dados foram deletados');
+    console.log('Os dados foram deletados');
   } catch (error) {
     console.log(error);
   }

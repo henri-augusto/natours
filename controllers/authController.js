@@ -11,21 +11,18 @@ const signToken = (id) =>
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 
-const sendSignToken = (res, statusCode, user) => {
+const sendSignToken = (res, statusCode, req, user) => {
   // Enviando um id para criar um token
   const token = signToken(user._id);
 
-  // Configurando um cookie
-  const cookieOptions = {
+  // Enviando um cookie com nome 'jwt' e um token
+  res.cookie('jwt', token, {
     expires: new Date(
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
     ),
     httpOnly: true,
-  };
-  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
-
-  // Enviando um cookie com nome 'jwt' e um token
-  res.cookie('jwt', token, cookieOptions);
+    secure: req.secure || req.headers['x-forwarded-proto'] === 'htpps',
+  });
 
   // Deletando o password da chamada de retorno, pois está voltando com password
   user.password = undefined;
@@ -46,7 +43,7 @@ exports.signup = catchAsync(async (req, res, next) => {
 
   await new Email(newUser, url).sendWelcome();
 
-  sendSignToken(res, 201, newUser);
+  sendSignToken(req, res, 201, newUser);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -62,7 +59,7 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError('Incorrect email our password', 401));
   }
 
-  sendSignToken(res, 200, user);
+  sendSignToken(req, res, 200, user);
 });
 
 exports.logout = (req, res, next) => {
@@ -212,7 +209,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   // Log in and envia JWT
 
-  sendSignToken(res, 200, user);
+  sendSignToken(req, res, 200, user);
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
@@ -227,5 +224,5 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   user.passwordConfirm = req.body.passwordConfirm;
   await user.save();
 
-  sendSignToken(res, 200, user);
+  sendSignToken(req, res, 200, user);
 });

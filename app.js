@@ -9,9 +9,6 @@ const cookieParser = require('cookie-parser');
 const compression = require('compression');
 const dotenv = require('dotenv');
 
-// Start express app
-const app = express();
-
 const AppError = require('./utils/appError');
 const globalErrorHandling = require('./controllers/errorController');
 const viewRouter = require('./routes/viewRoutes');
@@ -19,6 +16,11 @@ const toursRouter = require('./routes/toursRoutes');
 const usersRouter = require('./routes/usersRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
+
+// Start express app
+const app = express();
+
+app.enable('trust proxy');
 
 // Middleware's
 // Setando HTTP Headers security
