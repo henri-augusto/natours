@@ -8,6 +8,7 @@ const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
 const dotenv = require('dotenv');
+const cors = require('cors');
 
 const AppError = require('./utils/appError');
 const globalErrorHandling = require('./controllers/errorController');
@@ -20,9 +21,12 @@ const bookingRouter = require('./routes/bookingRoutes');
 // Start express app
 const app = express();
 
-app.enable('trust proxy');
-
 // Middleware's
+// Implement Cors
+app.use(cors());
+
+app.options('*', cors());
+
 // Setando HTTP Headers security
 app.use(
   helmet({
@@ -97,6 +101,9 @@ app.use((req, res, next) => {
 // Setando engine do PUG para leitura do front end
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
+
+// Enable proxy for heroku
+app.enable('trust proxy');
 
 // Rotas de acesso as funções da aplicação
 app.use('/', viewRouter);
