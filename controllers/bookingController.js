@@ -65,7 +65,6 @@ exports.webhookCheckout = (req, res, next) => {
   const sig = req.headers['stripe-signature'];
 
   let event;
-
   try {
     event = stripe.webhooks.constructEvent(
       req.body,
@@ -77,8 +76,10 @@ exports.webhookCheckout = (req, res, next) => {
     return;
   }
   // Handle the event
-  if (event.type === 'checkout.session.completed')
+  if (event.type === 'checkout.session.completed') {
+    console.log(event.data.object);
     checkoutSessionCompleted(event.data.object);
+  }
 
   // Return a 200 response to acknowledge receipt of the event
   res.status(200).json({ received: true });
