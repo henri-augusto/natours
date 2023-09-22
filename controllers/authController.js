@@ -11,7 +11,7 @@ const signToken = (id) =>
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 
-const sendSignToken = (res, statusCode, req, user) => {
+const sendSignToken = (req, res, statusCode, user) => {
   // Enviando um id para criar um token
   const token = signToken(user._id);
 
