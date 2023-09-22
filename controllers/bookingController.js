@@ -54,12 +54,12 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   });
 });
 
-const checkoutSessionCompleted = async (session) => {
+const checkoutSessionCompleted = catchAsync(async (session) => {
   const tour = session.line_items[0].price_data.product_data.id;
   const user = (await User.findOne({ email: session.customer_email })).id;
   const price = session.line_items[0].price_data.unit_amount / 100;
   await Booking.create({ tour, user, price });
-};
+});
 
 exports.webhookCheckout = (req, res, next) => {
   const sig = req.headers['stripe-signature'];
@@ -77,13 +77,9 @@ exports.webhookCheckout = (req, res, next) => {
     return;
   }
   // Handle the event
-  switch (event.type) {
-    case 'checkout.session.completed':
-      checkoutSessionCompleted(event.data.object);
-      break;
-    default:
-      console.log(`Unhandled event type ${event.type}`);
-  }
+  if (event.type === 'checkout.session.completed')
+    checkoutSessionCompleted(event.data.object);
+
   // Return a 200 response to acknowledge receipt of the event
   res.status(200).json({ received: true });
 };
