@@ -17,6 +17,7 @@ const toursRouter = require('./routes/toursRoutes');
 const usersRouter = require('./routes/usersRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
+const { webhookCheckout } = require('./controllers/bookingController');
 
 // Start express app
 const app = express();
@@ -65,7 +66,14 @@ const limiter = rateLimit({
   windowMs: 60 * 60 * 1000,
   message: 'Too many requests from this IP, please try again in an hour!',
 });
+
 app.use('/api', limiter);
+
+app.post(
+  '/webhook-checkout',
+  express.raw({ type: 'application/json' }),
+  webhookCheckout,
+);
 
 // Bodu parser, lendo dados from de body no req.body
 app.use(express.json({ limit: '10kb' }));
@@ -103,7 +111,7 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
 // Enable proxy for heroku
-app.enable('trust proxy');
+app.enable('trust proxy', 1);
 
 // Rotas de acesso as funções da aplicação
 app.use('/', viewRouter);
