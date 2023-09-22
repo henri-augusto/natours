@@ -81,7 +81,6 @@ exports.webhookCheckout = (req, res, next) => {
   }
   // Handle the event
   if (event.type === 'checkout.session.completed') {
-    console.log(event.data.object);
     checkoutSessionCompleted(event.data.object);
   }
 

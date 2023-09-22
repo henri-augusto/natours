@@ -111,7 +111,7 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
 // Enable proxy for heroku
-app.enable('trust proxy', 1);
+app.set('trust proxy', 'loopback');
 
 // Rotas de acesso as funções da aplicação
 app.use('/', viewRouter);
@@ -119,6 +119,9 @@ app.use('/api/v1/tours', toursRouter);
 app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/bookings', bookingRouter);
+app.get('/ip', (req, res) => {
+  res.send(req.ip);
+});
 
 app.all('*', (req, res, next) => {
   // A CLASSE 'APPERROR' NA NEXT() FAZ COM QUE O MIDDLEWARE IDENTIFIQUE
