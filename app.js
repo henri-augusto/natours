@@ -111,7 +111,7 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
 // Enable proxy for heroku
-// app.enable('trust proxy', 1);
+app.enable('trust proxy', 1);
 
 // Rotas de acesso as funções da aplicação
 app.use('/', viewRouter);
