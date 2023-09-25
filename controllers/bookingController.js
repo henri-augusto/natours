@@ -43,7 +43,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     customer_email: req.user.email,
     client_reference_id: tour.id,
     mode: 'payment',
-    success_url: `${req.protocol}://${req.get('host')}/`,
+    success_url: `${req.protocol}://${req.get('host')}/my-bookings`,
     cancel_url: `${req.protocol}://${req.get('host')}/tour/${tour.slug}`,
   });
 
@@ -54,7 +54,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   });
 });
 
-const checkoutSessionCompleted = async (session) => {
+const checkoutSessionCompleted = catchAsync(async (session) => {
   try {
     const tour = session.client_reference_id;
     const user = (await User.findOne({ email: session.customer_email })).id;
@@ -63,7 +63,7 @@ const checkoutSessionCompleted = async (session) => {
   } catch (error) {
     return console.log(error);
   }
-};
+});
 
 exports.webhookCheckout = (req, res, next) => {
   const sig = req.headers['stripe-signature'];

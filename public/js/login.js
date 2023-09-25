@@ -58,7 +58,7 @@ const login = async (email, password) => {
       showAlert('success', 'Logged in successfully');
       window.setTimeout(() => {
         location.assign('/');
-      }, 1500);
+      }, 1000);
     }
   } catch (error) {
     showAlert('error', error.response.data.message);
@@ -73,7 +73,7 @@ const logout = async () => {
       url: '/api/v1/users/logout',
     });
     if (result.data.status === 'success') {
-      location.reload(true);
+      location.assign('/');
     }
   } catch (error) {
     console.log(error);
@@ -134,6 +134,7 @@ const formLogin = document.querySelector('.form--login');
 if (formLogin)
   formLogin.addEventListener('submit', (e) => {
     e.preventDefault();
+    document.querySelector('.btn--green').textContent = 'Loading...';
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     login(email, password);

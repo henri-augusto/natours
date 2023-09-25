@@ -5,14 +5,16 @@ const {
   getLogin,
   getAccount,
   // updateUser,
-  getMyTours,
+  getMyBookings,
+  getMyReviews,
   getSignup,
 } = require('../controllers/viewController');
 const { isLoggedIn, protect } = require('../controllers/authController');
 
 const router = express.Router();
 
-router.get('/my-tours', protect, getMyTours);
+router.get('/my-reviews', protect, getMyReviews);
+router.get('/my-bookings', protect, getMyBookings);
 router.get('/me', protect, getAccount);
 router.get('/', isLoggedIn, getOverview);
 router.get('/tour/:slug', isLoggedIn, getTour);

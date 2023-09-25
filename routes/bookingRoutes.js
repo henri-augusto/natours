@@ -13,7 +13,7 @@ const router = express.Router();
 
 router.get('/checkout-session/:tourID', protect, getCheckoutSession);
 
-router.use(restrictTo('admin', 'lead-guide'));
+router.use(protect, restrictTo('admin', 'lead-guide'));
 
 router.route('/').post(createBooking).get(getBookings);
 router
