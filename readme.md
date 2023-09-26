@@ -52,8 +52,6 @@ app.use(
 This feature, i got a lot of work to solved. To fix the CSP on my project,
 i used HELMET for handled this and pass the directives to authorized the scripts.
 
-<<<<<<< HEAD
-
 ## License
 
 ¬¬'
