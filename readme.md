@@ -1,6 +1,6 @@
 # Natours Application
 
-[[![EXPRESS Version]][npm-expreess-version]]
+[[!EXPRESS Version][npm-expreess-version]]
 
 Built using modern technologies: node.js, express, mongoDB and mongoose.
 
@@ -17,6 +17,7 @@ You can also buy a booking setting a real world credit card. But if you don't wa
 
 ´´
 number: 4242 4242 4242 4242; date: 02/32; cvc: 222
+
 ´´
 
 ## Challenges
@@ -51,5 +52,7 @@ app.use(
 
 This feature, i got a lot of work to solved. To fix the CSP on my project,
 i used HELMET for handled this and pass the directives to authorized the scripts.
+
+
 
 [npm-expreess-version]: https://badgen.net/npm/v/express
