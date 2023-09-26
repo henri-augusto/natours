@@ -1,6 +1,6 @@
 # Natours Application
 
-[[!EXPRESS Version][npm-expreess-version]][npm-express-url]
+[![EXPRESS Version][npm-expreess-version]][npm-express-url]
 
 Built using modern technologies: node.js, express, mongoDB and mongoose.
 
