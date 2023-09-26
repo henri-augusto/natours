@@ -15,18 +15,15 @@ You can also buy a booking setting a real world credit card. But if you don't wa
 
 ### Test Credit Card
 
-<<<<<<< HEAD
 `number: 4242 4242 4242 4242;   date: 02/32;   cvc: 222`
-=======
-`number: 4242 4242 4242 4242;   date: 02/32;   cvc: 222`
-
-> > > > > > > b3fde8b854a1fccce9e24cb090ab410425634f54
 
 ## Challenges
 
 In this project, a lot of features was a challenge, but here that i consider a "real challenge":
 
 ### nº 1
+
+See the this peace of art:
 
 ```js
 app.use(
@@ -59,9 +56,7 @@ i used HELMET for handled this and pass the directives to authorized the scripts
 
 ## License
 
-# ¬¬'
-
-> > > > > > > b3fde8b854a1fccce9e24cb090ab410425634f54
+¬¬'
 
 [npm-expreess-version]: https://badgen.net/npm/v/express
 [npm-express-url]: https://www.npmjs.com/package/express
