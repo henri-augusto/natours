@@ -1,6 +1,6 @@
 # Natours Application
 
-[[!EXPRESS Version][npm-expreess-version]]
+[!EXPRESS Version][npm-expreess-version]
 
 Built using modern technologies: node.js, express, mongoDB and mongoose.
 
@@ -15,10 +15,9 @@ You can also buy a booking setting a real world credit card. But if you don't wa
 
 ### Test Credit Card
 
-´´
-number: 4242 4242 4242 4242; date: 02/32; cvc: 222
-
-´´
+``
+number: 4242 4242 4242 4242;   date: 02/32;   cvc: 222
+``
 
 ## Challenges
 
